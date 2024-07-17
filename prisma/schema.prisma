@@ -12,3 +12,19 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+
+model Todo{
+  id        Int      @default(autoincrement()) @id
+  task String 
+  description String?
+  status TodoStatus
+  createdat DateTime @default(now())
+  updatedat DateTime @updatedAt
+
+}
+
+enum TodoStatus{
+  DONE
+  ACTIVE
+}

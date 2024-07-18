@@ -21,6 +21,10 @@ model Todo{
   status TodoStatus
   createdat DateTime @default(now())
   updatedat DateTime @updatedAt
+  userEmail String?
+  user User? @relation(fields: [userEmail], references: [email])
+
+  @@index([userEmail])
 
 }
 
@@ -29,6 +33,7 @@ model User{
   email String @unique
   password String
   name String
+  todos Todo[]
 }
 
 enum TodoStatus{

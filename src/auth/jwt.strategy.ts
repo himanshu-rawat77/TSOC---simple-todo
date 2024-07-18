@@ -13,14 +13,14 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
         super({
             jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
                 ignoreExpiration : false,
-                    secretOrKey : "Secret"
+                    secretOrKey : 'Secret'
         })
     }
 
-    async validate(payload : {userEmail :string}){
-        const user = await this.databaseService.user.findUnique({
+    async validate(payload : {email :string}){
+        const user = await this.databaseService.user.findFirst({
             where : {
-                email : payload.userEmail,
+                email : payload.email,
             }
         });
         return user;
